@@ -1,0 +1,6 @@
+[bot]
+    [bot.logging]
+        enabled = true
+        level = "info"
+
+[api]

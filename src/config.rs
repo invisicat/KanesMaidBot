@@ -17,6 +17,4 @@ pub struct LoggingConfig {
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
-pub struct ApiConfig {
-    pub services: ServicesConfig,
-}
+pub struct ApiConfig {}
