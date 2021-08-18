@@ -6,7 +6,6 @@ use tracing::{Level, info, error};
 use tracing_subscriber::{FmtSubscriber, EnvFilter};
 use serenity::http::Http;
 use std::collections::HashSet;
-use std::collections::hash_map::RandomState;
 use serenity::model::id::UserId;
 
 pub fn read_config(file: &str) -> ConfigurationData {
@@ -48,19 +47,20 @@ pub struct AppInfo {
 pub async fn get_owners(token: &String) -> AppInfo {
     let http = Http::new_with_token(token);
 
-    let (owners, bot_id) = match http.get_current_application_info().await {
+    let (owners,bot_id) = match http.get_current_application_info().await {
         Ok(info) => {
             let mut owners = HashSet::new();
             owners.insert(info.owner.id);
-            (owners, info.id)
+            (Some(owners), Some(info.id))
         },
         Err(why) => {
             error!("Unable to retrieve application info {:?}", why);
+            (None, None)
         }
     };
 
     AppInfo {
-        owners,
-        bot_id
+        owners: owners.expect("Could not get owner map"),
+        bot_id: bot_id.expect("Could not get bot id")
     }
 }
