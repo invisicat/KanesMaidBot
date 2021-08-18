@@ -12,7 +12,7 @@ services:
       - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
       - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
       - REDIS_URL=http://redis:6379
-      - REDIS_PASS=
+      - REDIS_PASS=${REDIS_PASS}
   influx:
     image: influxdb:latest
     ports:
