@@ -1,5 +1,5 @@
 use crate::config::ConfigurationData;
-use crate::data::{ConfigContainer, ReqwestContainer, ShardManagerContainer, UptimeContainer};
+use crate::data::{ConfigContainer, ReqwestContainer, ShardManagerContainer, UptimeContainer, DatabasePool};
 use crate::eventhandler::Handler;
 use crate::utils::{read_config, AppInfo};
 use chrono::Utc;
@@ -16,7 +16,6 @@ use tracing::{info, instrument};
 #[macro_use]
 extern crate diesel;
 
-pub mod models;
 pub mod schema;
 
 mod config;
@@ -25,6 +24,7 @@ mod data;
 mod eventhandler;
 mod events;
 mod utils;
+mod models;
 
 #[tokio::main(worker_threads = 16)]
 #[instrument]
@@ -92,7 +92,10 @@ async fn build_client_data(client: &Client, config: &ConfigurationData) {
             .build()
             .expect("Could not build reqwest client");
 
+        let pool = utils::db_connection::establish_connection();
+
         data.insert::<ReqwestContainer>(http_client);
+        data.insert::<DatabasePool>(pool);
         data.insert::<ShardManagerContainer>(Arc::clone(&client.shard_manager));
         data.insert::<ConfigContainer>(config.clone());
         data.insert::<UptimeContainer>(Utc::now());

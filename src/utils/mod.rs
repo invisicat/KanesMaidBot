@@ -1,3 +1,5 @@
+pub mod db_connection;
+
 use crate::config::ConfigurationData;
 
 use serenity::http::Http;

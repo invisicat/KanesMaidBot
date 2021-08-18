@@ -4,13 +4,18 @@ use reqwest::Client as ReqwestClient;
 use serenity::client::bridge::gateway::ShardManager;
 use serenity::prelude::*;
 use std::sync::Arc;
+use crate::utils::db_connection::PgPool;
 
 pub struct ShardManagerContainer;
 pub struct ConfigContainer;
-// pub struct DatabasePool;
+pub struct DatabasePool;
 pub struct ReqwestContainer;
 pub struct UptimeContainer;
 
+
+impl TypeMapKey for DatabasePool {
+    type Value = PgPool;
+}
 impl TypeMapKey for ShardManagerContainer {
     type Value = Arc<Mutex<ShardManager>>;
 }
