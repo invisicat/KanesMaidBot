@@ -2,14 +2,12 @@ use serenity::framework::StandardFramework;
 use serenity::client::ClientBuilder;
 use serenity::client::bridge::gateway::GatewayIntents;
 use serenity::Client;
-use serenity::model::prelude::*;
 use reqwest::Client as ReqwestClient;
 use reqwest::redirect::Policy;
-use tracing::{error, info, instrument, Level};
+use tracing::{info, instrument};
 use dotenv::dotenv;
 use chrono::Utc;
 use std::sync::Arc;
-use std::error::Error;
 use crate::utils::{read_config, AppInfo};
 use crate::config::ConfigurationData;
 use crate::data::{ReqwestContainer, ConfigContainer, UptimeContainer, ShardManagerContainer};
@@ -46,13 +44,14 @@ async fn main() {
     }
     let app_info = utils::get_owners(&token).await;
 
-    let framework: StandardFramework = build_framework(app_info, config);
+    let framework: StandardFramework = build_framework(app_info);
 
     let mut client = ClientBuilder::new(&token)
         .application_id(app_id)
         .intents(GatewayIntents::all())
         .framework(framework)
-        .await?;
+        .await
+        .expect("Could not create client");
 
     build_client_data(&client, &config).await;
 
@@ -69,10 +68,10 @@ async fn main() {
     }
 }
 
-fn build_framework(app_info: AppInfo, config: ConfigurationData) -> StandardFramework {
+fn build_framework(app_info: AppInfo) -> StandardFramework {
     StandardFramework::new()
         .configure(|config| {
-            config.on_mention(Some(bot_id));
+            config.on_mention(Some(app_info.bot_id));
             config.ignore_bots(true);
             config.ignore_webhooks(true);
             config.case_insensitivity(true);
@@ -88,7 +87,7 @@ async fn build_client_data(client: &Client, config: &ConfigurationData) {
         // Lock so we can edit!
         let mut data = client.data.write().await;
 
-        let http_client = ReqwestClient::builder().user_agent(constants::REQWEST_USER_AGENT).redirect(Policy::none()).build()?;
+        let http_client = ReqwestClient::builder().user_agent(constants::REQWEST_USER_AGENT).redirect(Policy::none()).build().expect("Could not build reqwest client");
 
 
         data.insert::<ReqwestContainer>(http_client);
