@@ -502,6 +502,7 @@ dependencies = [
 name = "kanes-maid"
 version = "0.1.0"
 dependencies = [
+ "chrono",
  "diesel",
  "dotenv",
  "reqwest",
