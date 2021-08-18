@@ -7,3 +7,7 @@
         client_id = 295007212638830592
 
 [api]
+    [influx]
+        enabled = false
+        url = "http://localhost:8086"
+        db = "test"

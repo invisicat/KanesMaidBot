@@ -12,6 +12,9 @@ pub struct BotConfig {
     pub discord: DiscordConfig
 }
 
+/*
+BOT RELATED
+ */
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct DiscordConfig {
     pub app_id: u64,
@@ -24,5 +27,17 @@ pub struct LoggingConfig {
     pub level: String
 }
 
+/*
+API RELATED
+ */
 #[derive(Debug, Clone, Deserialize, Serialize)]
-pub struct ApiConfig {}
+pub struct ApiConfig {
+    pub influx: InfluxConfig;
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct InfluxConfig {
+    pub enabled: bool,
+    pub url: String,
+    pub db: String
+}
