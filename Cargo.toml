@@ -3,8 +3,29 @@ name = "kanes-maid"
 version = "0.1.0"
 authors = ["AndyIsCool5463 <andyl5463@gmail.com>"]
 license = "GPL-3.0-or-later"
+readme  = "README.md"
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+serde               = { version = "1.0.126", features = ["derive"] }
+serde_json          = "1.0.64"
+tokio               = { version = "1.9.0", features = ["full"] }
+toml                = "0.5.8"
+tracing             = "0.1.26"
+tracing-futures     = "0.2.5"
+tracing-log         = "0.1.2"
+tracing-subscriber  = "0.2.19"
+
+
+[dependencies.reqwest]
+version             = "0.11.4"
+default-features    = false
+features            = ["json", "multipart", "stream", "rustls-tls"]
+
+[dependencies.serenity]
+git                 = "https://github.com/serenity-rs/serenity"
+branch              = "current"
+default-features    = true
+features            = ["collector", "unstable_discord_api", "rustls_backend"]
