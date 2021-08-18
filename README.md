@@ -17,11 +17,13 @@ A funky discord bot made to do stuff. It's cool and everything.
 - [ ] 🎹 Custom Commands
 - [ ] 📊 Web dashboard
 - [ ] 💵 Leveling System
+- [ ] 🌠 Customized Rewards
 - [ ] 🔕 Anti Spam
 - [ ] ✅ Server Verification
 - [ ] 📸 Image Generation
 - [ ] 🎶 Music
 - [ ] 📚 API Access (Reddit, Instagram, E.A, Steam, etc)
+- [ ] 🎲 Game Integration (Apex Legends, Minecraft, Among Us, etc)
 
 
 
