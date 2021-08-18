@@ -1,0 +1,8 @@
+{
+  "language": "English (US)",
+  "command": {
+    "error": "Hey! There was an error executing your command!",
+    "error_msg": "Hey! There was an error executing your command! `%s`",
+    "error_noperm": "Hey! You don't have permission to run `%s`",
+  }
+}

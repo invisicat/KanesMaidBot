@@ -24,6 +24,7 @@ A funky discord bot made to do stuff. It's cool and everything.
 - [ ] 🎶 Music
 - [ ] 📚 API Access (Reddit, Instagram, E.A, Steam, etc)
 - [ ] 🎲 Game Integration (Apex Legends, Minecraft, Among Us, etc)
+- [ ] 🈁 Localization (Translatable)
 
 ## Development
 
