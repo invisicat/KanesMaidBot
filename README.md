@@ -8,6 +8,23 @@ A funky discord bot made to do stuff. It's cool and everything.
 [![GitHub Actions Build Status][github-actions-badge]][github-actions-link]
 
 
+## Features
+- [ ] 📈 InfluxDB (Monitor statistics)
+- [ ] ⏱ RedisDB (Interact from the outside world)
+- [ ] 👮‍♂️ Moderation Commands
+- [ ] 🎮 Game Commands
+- [ ] 🔧 Utility Commands
+- [ ] 🎹 Custom Commands
+- [ ] 📊 Web dashboard
+- [ ] 💵 Leveling System
+- [ ] 🔕 Anti Spam
+- [ ] ✅ Server Verification
+- [ ] 📸 Image Generation
+- [ ] 🎶 Music
+- [ ] 📚 API Access (Reddit, Instagram, E.A, Steam, etc)
+
+
+
 
 ### Licensing
 
