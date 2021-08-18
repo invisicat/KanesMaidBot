@@ -1,7 +1,8 @@
 [package]
-name = "Kanes-Maid"
+name = "kanes-maid"
 version = "0.1.0"
 authors = ["AndyIsCool5463 <andyl5463@gmail.com>"]
+license = "GPL-3.0-or-later"
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
