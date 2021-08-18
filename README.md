@@ -11,6 +11,7 @@ A funky discord bot made to do stuff. It's cool and everything.
 ## Features
 - [ ] 📈 InfluxDB (Monitor statistics)
 - [ ] ⏱ RedisDB (Interact from the outside world)
+- [ ] 🚢 Dockerized
 - [ ] 👮‍♂️ Moderation Commands
 - [ ] 🎮 Game Commands
 - [ ] 🔧 Utility Commands
