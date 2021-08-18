@@ -2,5 +2,8 @@
     [bot.logging]
         enabled = true
         level = "info"
+    [bot.discord]
+        app_id = 295007212638830592
+        client_id = 295007212638830592
 
 [api]

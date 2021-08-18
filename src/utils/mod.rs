@@ -40,10 +40,15 @@ pub fn start_logging(base_level: &str) {
 }
 
 
-pub async fn get_owners(&token: String) -> (HashSet<UserId>, UserId) {
+pub struct AppInfo {
+    pub owners: HashSet<UserId>,
+    pub bot_id: UserId
+}
+
+pub async fn get_owners(token: &String) -> AppInfo {
     let http = Http::new_with_token(token);
 
-    let (owner, bot_id) = match http.get_current_application_info().await {
+    let (owners, bot_id) = match http.get_current_application_info().await {
         Ok(info) => {
             let mut owners = HashSet::new();
             owners.insert(info.owner.id);
@@ -54,5 +59,8 @@ pub async fn get_owners(&token: String) -> (HashSet<UserId>, UserId) {
         }
     };
 
-    (owner, bot_id)
+    AppInfo {
+        owners,
+        bot_id
+    }
 }

@@ -8,8 +8,16 @@ pub struct ConfigurationData {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct BotConfig {
-    pub logging: LoggingConfig
+    pub logging: LoggingConfig,
+    pub discord: DiscordConfig
 }
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct DiscordConfig {
+    pub app_id: u64,
+    pub client_id: u64
+}
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct LoggingConfig {
     pub enabled: bool,
