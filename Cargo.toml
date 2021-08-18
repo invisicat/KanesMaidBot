@@ -1,0 +1,9 @@
+[package]
+name = "Kanes-Maid"
+version = "0.1.0"
+authors = ["AndyIsCool5463 <andyl5463@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
