@@ -8,7 +8,10 @@ extern crate diesel;
 
 pub mod schema;
 pub mod models;
+
 mod constants;
+mod config;
+mod utils;
 
 
 #[tokio::main(worker_threads = 16)]
@@ -17,5 +20,6 @@ async fn main() {
     print!("\x1B[2J\x1B[1;1H");
     println!("{}\n\n", constants::TITLE);
 
+    start_tracing();
 
 }
