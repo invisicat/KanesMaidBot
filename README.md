@@ -25,8 +25,33 @@ A funky discord bot made to do stuff. It's cool and everything.
 - [ ] 📚 API Access (Reddit, Instagram, E.A, Steam, etc)
 - [ ] 🎲 Game Integration (Apex Legends, Minecraft, Among Us, etc)
 
+## Development
+
+Kane's Maid is composed of many technologies and open source projects:
+
+### Infrastructure
+- Github for code management and version control
+- Github actions for CI and CD
+- Discord for discussions
+- InfluxDB and Grafana for statistics
+- RedisDB and RabbitMQ for scalable integrations between microservices
+- My RaspberryPI hosting all this 🥧
+
+### Runtimes
+- RustLang for running the bot
+- cargo for testing, running the dev service, building binaries and as the runtime harness
+- Node.js for the web dashboard
 
 
+### Semver
+Kane's Maid is using [Semantic Versioning 2.0][semantic-versioning-link].
+
+### Contributing
+
+Contributions are welcome! Feel free to make a pull request to add any features that are appropriate. Though, make sure
+you read up on the [Contributing Guide][github-contribution-link] before making one.
+
+Thank you to all the people who already contributed to Kane's Maid!
 
 ### Licensing
 
@@ -49,3 +74,7 @@ with regards to this software.
 
 [github-actions-link]: https://github.com/RiceCX/KanesMaidBot/actions/workflows/ci.yml
 [github-actions-badge]: https://github.com/RiceCX/KanesMaidBot/actions/workflows/ci.yml/badge.svg?branch=master
+
+[github-contribution-link]: https://github.com/RiceCX/KanesMaidBot/blob/master/CONTRIBUTING.md
+
+[semantic-versioning-link]: https://semver.org/
