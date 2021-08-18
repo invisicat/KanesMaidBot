@@ -1,0 +1,36 @@
+version: 3.9
+
+services:
+  bot:
+    build: ./
+    command: ./Kanes-Maid
+    depends_on:
+      - influx
+      - redis
+    environment:
+      - INFLUXDB_URL=http://influxdb:8086
+      - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
+      - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
+      - REDIS_URL=http://redis:6379
+      - REDIS_PASS=
+  influx:
+    image: influxdb:latest
+    ports:
+      - 8086:8086
+    volumes:
+      - influxdb-storage:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DB=db0
+      - INFLUXDB_ADMIN_USER=${INFLUXDB_USERNAME}
+      - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_PASSWORD}
+  redis:
+    image: redis:alpine-latest
+    command: redis-server --requirepass ${PASSWORD} --appendonly yes
+    ports:
+      - 6379:6379
+    environment:
+      - PASSWORD=${REDIS_PASS}
+
+
+volumes:
+  influxdb-storage:
