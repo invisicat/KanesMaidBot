@@ -32,7 +32,8 @@ API RELATED
  */
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct ApiConfig {
-    pub influx: InfluxConfig;
+    pub influx: InfluxConfig,
+    pub redis: RedisConfig
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -40,4 +41,9 @@ pub struct InfluxConfig {
     pub enabled: bool,
     pub url: String,
     pub db: String
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct RedisConfig {
+    pub enabled: bool,
 }

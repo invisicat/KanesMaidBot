@@ -11,3 +11,5 @@
         enabled = false
         url = "http://localhost:8086"
         db = "test"
+    [redis]
+        enabled = false
