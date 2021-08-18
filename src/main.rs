@@ -11,6 +11,7 @@ use std::sync::Arc;
 use crate::utils::{read_config, AppInfo};
 use crate::config::ConfigurationData;
 use crate::data::{ReqwestContainer, ConfigContainer, UptimeContainer, ShardManagerContainer};
+use crate::eventhandler::Handler;
 
 
 #[macro_use]
@@ -24,6 +25,8 @@ mod constants;
 mod config;
 mod utils;
 mod data;
+mod events;
+mod eventhandler;
 
 
 #[tokio::main(worker_threads = 16)]
@@ -47,6 +50,7 @@ async fn main() {
     let framework: StandardFramework = build_framework(app_info);
 
     let mut client = ClientBuilder::new(&token)
+        .event_handler(Handler)
         .application_id(app_id)
         .intents(GatewayIntents::all())
         .framework(framework)
