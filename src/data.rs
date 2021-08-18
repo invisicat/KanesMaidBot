@@ -1,9 +1,9 @@
+use crate::config::ConfigurationData;
+use chrono::{DateTime, Utc};
+use reqwest::Client as ReqwestClient;
+use serenity::client::bridge::gateway::ShardManager;
 use serenity::prelude::*;
 use std::sync::Arc;
-use serenity::client::bridge::gateway::ShardManager;
-use crate::config::ConfigurationData;
-use reqwest::Client as ReqwestClient;
-use chrono::{DateTime, Utc};
 
 pub struct ShardManagerContainer;
 pub struct ConfigContainer;

@@ -1,33 +1,30 @@
-use serenity::framework::StandardFramework;
-use serenity::client::ClientBuilder;
-use serenity::client::bridge::gateway::GatewayIntents;
-use serenity::Client;
-use reqwest::Client as ReqwestClient;
-use reqwest::redirect::Policy;
-use tracing::{info, instrument};
-use dotenv::dotenv;
-use chrono::Utc;
-use std::sync::Arc;
-use crate::utils::{read_config, AppInfo};
 use crate::config::ConfigurationData;
-use crate::data::{ReqwestContainer, ConfigContainer, UptimeContainer, ShardManagerContainer};
+use crate::data::{ConfigContainer, ReqwestContainer, ShardManagerContainer, UptimeContainer};
 use crate::eventhandler::Handler;
-
+use crate::utils::{read_config, AppInfo};
+use chrono::Utc;
+use dotenv::dotenv;
+use reqwest::redirect::Policy;
+use reqwest::Client as ReqwestClient;
+use serenity::client::bridge::gateway::GatewayIntents;
+use serenity::client::ClientBuilder;
+use serenity::framework::StandardFramework;
+use serenity::Client;
+use std::sync::Arc;
+use tracing::{info, instrument};
 
 #[macro_use]
 extern crate diesel;
 
-
-pub mod schema;
 pub mod models;
+pub mod schema;
 
-mod constants;
 mod config;
-mod utils;
+mod constants;
 mod data;
-mod events;
 mod eventhandler;
-
+mod events;
+mod utils;
 
 #[tokio::main(worker_threads = 16)]
 #[instrument]
@@ -40,7 +37,6 @@ async fn main() {
     let config = read_config("config.toml");
     let app_id = config.bot.discord.app_id;
     let token = std::env::var("DISCORD_TOKEN").expect("Expected a discord token in env");
-
 
     if config.bot.logging.enabled {
         utils::start_logging(&config.bot.logging.level);
@@ -73,17 +69,16 @@ async fn main() {
 }
 
 fn build_framework(app_info: AppInfo) -> StandardFramework {
-    StandardFramework::new()
-        .configure(|config| {
-            config.on_mention(Some(app_info.bot_id));
-            config.ignore_bots(true);
-            config.ignore_webhooks(true);
-            config.case_insensitivity(true);
-            config.no_dm_prefix(true);
-            config.owners(app_info.owners);
+    StandardFramework::new().configure(|config| {
+        config.on_mention(Some(app_info.bot_id));
+        config.ignore_bots(true);
+        config.ignore_webhooks(true);
+        config.case_insensitivity(true);
+        config.no_dm_prefix(true);
+        config.owners(app_info.owners);
 
-            config
-        })
+        config
+    })
 }
 
 async fn build_client_data(client: &Client, config: &ConfigurationData) {
@@ -91,8 +86,11 @@ async fn build_client_data(client: &Client, config: &ConfigurationData) {
         // Lock so we can edit!
         let mut data = client.data.write().await;
 
-        let http_client = ReqwestClient::builder().user_agent(constants::REQWEST_USER_AGENT).redirect(Policy::none()).build().expect("Could not build reqwest client");
-
+        let http_client = ReqwestClient::builder()
+            .user_agent(constants::REQWEST_USER_AGENT)
+            .redirect(Policy::none())
+            .build()
+            .expect("Could not build reqwest client");
 
         data.insert::<ReqwestContainer>(http_client);
         data.insert::<ShardManagerContainer>(Arc::clone(&client.shard_manager));
