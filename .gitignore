@@ -1,5 +1,8 @@
-/target
+target/
 .idea/
+certs/
+
 
 *.env
 *.env.local
+

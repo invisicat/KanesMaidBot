@@ -4,7 +4,7 @@ use reqwest::Client as ReqwestClient;
 use serenity::client::bridge::gateway::ShardManager;
 use serenity::prelude::*;
 use std::sync::Arc;
-use crate::utils::db_connection::PgPool;
+use sqlx::PgPool;
 
 pub struct ShardManagerContainer;
 pub struct ConfigContainer;

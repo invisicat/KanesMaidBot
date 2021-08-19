@@ -13,11 +13,6 @@ use serenity::Client;
 use std::sync::Arc;
 use tracing::{info, instrument};
 
-#[macro_use]
-extern crate diesel;
-
-pub mod schema;
-
 mod config;
 mod constants;
 mod data;
@@ -92,7 +87,7 @@ async fn build_client_data(client: &Client, config: &ConfigurationData) {
             .build()
             .expect("Could not build reqwest client");
 
-        let pool = utils::db_connection::establish_connection();
+        let pool = utils::db_connection::establish_connection().await;
 
         data.insert::<ReqwestContainer>(http_client);
         data.insert::<DatabasePool>(pool);

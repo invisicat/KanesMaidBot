@@ -4,7 +4,7 @@ use serenity::model::prelude::Ready;
 use serenity::model::user::OnlineStatus;
 use tracing::info;
 use crate::data::DatabasePool;
-use diesel::RunQueryDsl;
+use sqlx::Row;
 
 pub async fn ready(ctx: Context, ready: Ready) {
     let http = &ctx.http;
