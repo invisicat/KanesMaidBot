@@ -10,6 +10,6 @@ struct NewServer {
 
 impl NewServer {
     fn create(pool: PgPool, new: NewServer) {
-        sqlx::
+        //
     }
 }

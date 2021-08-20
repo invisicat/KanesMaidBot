@@ -12,6 +12,7 @@ use serenity::framework::StandardFramework;
 use serenity::Client;
 use std::sync::Arc;
 use tracing::{info, instrument};
+use std::borrow::Borrow;
 
 mod config;
 mod constants;
@@ -20,6 +21,8 @@ mod eventhandler;
 mod events;
 mod utils;
 mod models;
+mod commands;
+mod command;
 
 #[tokio::main(worker_threads = 16)]
 #[instrument]
@@ -64,8 +67,9 @@ async fn main() {
 }
 
 fn build_framework(app_info: AppInfo) -> StandardFramework {
-    StandardFramework::new().configure(|config| {
+    let framework = StandardFramework::new().configure(|config| {
         config.on_mention(Some(app_info.bot_id));
+        config.prefix("-");
         config.ignore_bots(true);
         config.ignore_webhooks(true);
         config.case_insensitivity(true);
@@ -73,7 +77,9 @@ fn build_framework(app_info: AppInfo) -> StandardFramework {
         config.owners(app_info.owners);
 
         config
-    })
+    });
+
+    command::add_commands(framework)
 }
 
 async fn build_client_data(client: &Client, config: &ConfigurationData) {
@@ -87,10 +93,10 @@ async fn build_client_data(client: &Client, config: &ConfigurationData) {
             .build()
             .expect("Could not build reqwest client");
 
-        let pool = utils::db_connection::establish_connection().await;
+     //   let pool = utils::db_connection::establish_connection().await;
 
         data.insert::<ReqwestContainer>(http_client);
-        data.insert::<DatabasePool>(pool);
+     //   data.insert::<DatabasePool>(pool);
         data.insert::<ShardManagerContainer>(Arc::clone(&client.shard_manager));
         data.insert::<ConfigContainer>(config.clone());
         data.insert::<UptimeContainer>(Utc::now());

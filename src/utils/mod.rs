@@ -1,4 +1,5 @@
 pub mod db_connection;
+pub mod message;
 
 use crate::config::ConfigurationData;
 
